@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Calculadora con Vue.js</title>
+	<link rel="stylesheet" href="calculadora-vue - copia.css">
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div class="contenedor" id="contenedor">
+
+		<div class="calculadora" id="calculadora">
+			<div id="operaciones">{{this.operaciones}}</div>
+			<div class="panel-numerico">
+				<ul>
+					<li class="numero" @click="inicio(0)">1</li>
+					<li class="numero" @click="inicio(1)">2</li>
+					<li class="numero" @click="inicio(2)">3</li>
+					<li class="operador" @click="inicio(3)">+</li>
+					<li class="numero" @click="inicio(4)">4</li>
+					<li class="numero" @click="inicio(5)">5</li>
+					<li class="numero" @click="inicio(6)">6</li>
+					<li class="operador" @click="inicio(7)">-</li>
+					<li class="numero" @click="inicio(8)">7</li>
+					<li class="numero" @click="inicio(9)">8</li>
+					<li class="numero" @click="inicio(10)">9</li>
+					<li class="operador" @click="inicio(11)">*</li>
+					<li class="operador" @click="inicio(12)">/</li>
+					<li class="numero" @click="inicio(13)">0</li>
+					<li class="decimal" @click="inicio(14)">.</li>
+					<li class="igual" @click="inicio(15)">=</li>
+					<li class="borrar" @click="inicio(16)">C</li>
+				</ul>
+			</div>
+		</div>
+		<div id="historial">
+			<h3>Historial</h3>
+			<div v-html="historial">{{this.historial}}</div>
+			<br>
+			<button class="boton" @click="limpiarHistorial()">Limpiar</button>
+		</div>
+	</div>
+	<script src="calculadora-vue - copia.js"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Tabla de Multiplicar Reactiva con Vue <3</title>
+	<link rel="stylesheet" href="tablaDeMultiplicar.css">
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div class="contenedor" id="contenedor">
+		<h2 id="tabla"> Numero a sacar la tabla: {{this.numero}}</h2>
+		<div class="div-input">
+			<input type="number" v-model="numero" @ class="campo-texto">
+			<button @click="entablar()" class="boton">Sacar Tabla</button>
+
+		</div>
+		<div id="tablaMultiplicar" v-html="tablaMultiplicar">
+			<ul>
+				{{this.tablaMultiplicar}}
+			</ul>
+			
+		</div>
+	</div>
+
+	<script src="tablaDeMultiplicar.js"></script>
+</body>
+</html>
