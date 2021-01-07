@@ -13,7 +13,8 @@
 		<div class="calculadora" id="calculadora">
 			<div id="operaciones">{{this.operaciones}}</div>
 			<div class="panel-numerico">
-				<ul>
+				<!-- codigo que esta bueno -->
+				<!-- <ul>
 					<li class="numero" @click="inicio(0)">1</li>
 					<li class="numero" @click="inicio(1)">2</li>
 					<li class="numero" @click="inicio(2)">3</li>
@@ -31,11 +32,17 @@
 					<li class="decimal" @click="inicio(14)">.</li>
 					<li class="igual" @click="inicio(15)">=</li>
 					<li class="borrar" @click="inicio(16)">C</li>
+				</ul> -->
+				<!-- codigo experimental -->
+				<ul>
+					<li  v-for="(tecla, indice) in teclas2"  @click="inicio(indice)" :class="tecla.class">
+						{{tecla.inner}} 
+					</li>
 				</ul>
 			</div>
 		</div>
 		<div id="historial">
-			<h3>Historial</h3>
+			<h4>Historial:</h4>
 			<div v-html="historial">{{this.historial}}</div>
 			<br>
 			<button class="boton" @click="limpiarHistorial()">Limpiar</button>

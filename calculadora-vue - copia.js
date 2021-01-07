@@ -1,60 +1,71 @@
-// let teclas = document.querySelectorAll(".panel-numerico ul li")
-// console.log(teclas)
 const calculadora = new Vue({
 	el: "#contenedor",
 	data:{
 		digito: null,
 		accion: null,
-		comprobarSignos: 0,
-		comprobarDecimal: false,
-		comprobarOperador: false,
-		comprobarResultado: false,
+		cantidadSignos: 0,
+		cantidadPuntos: 0,
 		operaciones: "0",
-		teclas: document.querySelectorAll(".panel-numerico ul li"),
-		domHistorial: document.getElementById('historial'),
 		historial: " ",
-
+		teclas2: [
+			{class: "numero", inner: "1"},
+			{class: "numero", inner: "2"},
+			{class: "numero", inner: "3"},
+			{class: "operador", inner: "+"},
+			{class: "numero", inner: "4"},
+			{class: "numero", inner:"5"},
+			{class: "numero", inner: "6"},
+			{class: "operador", inner: "-"},
+			{class: "numero", inner: "7"},
+			{class: "numero", inner: "8"},
+			{class: "numero", inner: "9"},
+			{class: "operador", inner: "/"},
+			{class: "numero", inner: "0"},
+			{class: "operador", inner: "*"},
+			{class: "decimal", inner: "."},
+			{class: "igual", inner: "="},
+			{class: "borrar", inner: "C"},
+		]
 	},
 	methods:{
-		inicio(digito){
-		 	this.digito = this.teclas[digito].innerHTML;
-		 	this.accion = this.teclas[digito].className
+		inicio(indice){
+			this.digito = this.teclas2[indice].inner
+			this.accion = this.teclas2[indice].class
 		 	calculadora.agregarDigito()
 		},
 		 agregarDigito(){
 			if (this.accion === "numero") {
-				if (this.operaciones == "0") {
-					this.operaciones = this.digito;
-				}else{
-					this.comprobarSignos = 0;
-					this.comprobarOperador = false;
+				if (this.operaciones == "0") this.operaciones = this.digito;
+				else{
+					this.cantidadSignos = 0;
 					this.operaciones += this.digito;
 				}
 			}
 			else if (this.accion === "operador") {
-				this.comprobarSignos++;
-				if(this.comprobarSignos > 1);
+				this.cantidadSignos++
+				if(this.cantidadSignos > 1);
 				else{
-					if (this.comprobarSignos == 0) this.operacion = 0;
+					if (this.cantidadSignos == 0){ 
+						this.operacion = 0;
+					}
 					else {
 						this.operaciones += this.digito; 
-						this.comprobarOperador = true
-						this.comprobarDecimal = false
+						this.cantidadPuntos = 0
 					}
 				}
 			}
 			else if (this.accion === "decimal") {
-				if(this.comprobarDecimal || this.comprobarSignos == 1);
-				else{
-					this.operaciones += this.digito;
-					this.comprobarDecimal = true;
-				}
+				if (this.cantidadSignos == 0) {
+					this.cantidadPuntos++
+					if(this.cantidadPuntos > 1 || this.cantidadSignos == 1);
+					else{
+						this.operaciones += this.digito;
+					}
+				};
 			}
 			else if (this.accion == "igual") {
-				if (this.comprobarSignos == 1 || this.comprobarDecimal);
-				else{
-					calculadora.calcular()
-				}
+				if (this.cantidadSignos == 1);
+				else calculadora.calcular()
 			}
 			else calculadora.borrar();
 		},
@@ -67,16 +78,13 @@ const calculadora = new Vue({
 		},
 		borrar(){
 			this.operaciones = "0";
-			this.comprobarSignos = 0; 
-			this.comprobarDecimal = false;
-			this.comprobarOperador = false;
+			this.cantidadSignos = 0; 
 		},
 		agregarAlHistorial(operacion,resultado){
-			this.historial += `<br><br> Operacion: ${operacion} <br>                
-			resultado: ${resultado}  `;
+			if(this.historial == " ") this.historial = `<br> Operacion: ${operacion} <br> resultado: ${resultado}  `;
+			else this.historial += `<br><br> Operacion: ${operacion} <br> resultado: ${resultado}  `;
+			
 		},
-		limpiarHistorial(){
-			this.historial = " "
-		}
+		limpiarHistorial(){this.historial = " "},
 	}
 })
